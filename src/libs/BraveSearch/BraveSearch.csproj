@@ -6,7 +6,8 @@
 
   <PropertyGroup Label="Nuget">
     <Description>C# SDK for the Brave Search API -- web, image, video, and news search with AI-powered summaries.</Description>
-    <PackageTags>brave;brave-search;search;api;client;sdk;dotnet;openapi;autosdk</PackageTags>
+    <PackageId>BraveSearch</PackageId>
+    <PackageTags>api;client;sdk;dotnet;openapi;brave-search;search;rag;ai;autosdk</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
