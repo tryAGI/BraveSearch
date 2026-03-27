@@ -1,4 +1,3 @@
-#pragma warning disable CS3002 // Return type is not CLS-compliant
 using Microsoft.Extensions.AI;
 
 namespace BraveSearch;
@@ -15,6 +14,7 @@ public static class BraveSearchToolExtensions
     /// <param name="client">The Brave Search client to use for searches.</param>
     /// <param name="count">Maximum number of search results to return (default: 5).</param>
     /// <returns>An AIFunction that can be passed to ChatOptions.Tools.</returns>
+    [CLSCompliant(false)]
     public static AIFunction AsSearchTool(
         this BraveSearchClient client,
         int count = 5)
@@ -42,6 +42,7 @@ public static class BraveSearchToolExtensions
     /// <param name="client">The Brave Search client to use for news searches.</param>
     /// <param name="count">Maximum number of news results to return (default: 5).</param>
     /// <returns>An AIFunction that can be passed to ChatOptions.Tools.</returns>
+    [CLSCompliant(false)]
     public static AIFunction AsNewsTool(
         this BraveSearchClient client,
         int count = 5)
