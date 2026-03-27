@@ -1,0 +1,56 @@
+
+#nullable enable
+
+namespace BraveSearch
+{
+    /// <summary>
+    /// Container for autocomplete suggestion results.
+    /// </summary>
+    public sealed partial class SuggestResults
+    {
+        /// <summary>
+        /// The type identifier.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("type")]
+        public string? Type { get; set; }
+
+        /// <summary>
+        /// List of suggestions.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("results")]
+        public global::System.Collections.Generic.IList<global::BraveSearch.SuggestResult>? Results { get; set; }
+
+        /// <summary>
+        /// Additional properties that are not explicitly defined in the schema
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonExtensionData]
+        public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SuggestResults" /> class.
+        /// </summary>
+        /// <param name="type">
+        /// The type identifier.
+        /// </param>
+        /// <param name="results">
+        /// List of suggestions.
+        /// </param>
+#if NET7_0_OR_GREATER
+        [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
+        public SuggestResults(
+            string? type,
+            global::System.Collections.Generic.IList<global::BraveSearch.SuggestResult>? results)
+        {
+            this.Type = type;
+            this.Results = results;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SuggestResults" /> class.
+        /// </summary>
+        public SuggestResults()
+        {
+        }
+    }
+}
