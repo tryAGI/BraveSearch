@@ -14,7 +14,7 @@ dotnet test src/tests/IntegrationTests/
 
 ## Auth
 
-Bearer token auth (converted to X-Subscription-Token header at request time):
+API key auth (sent as `X-Subscription-Token` header via `--security-scheme`):
 
 ```csharp
 var client = new BraveSearchClient(apiKey); // BRAVESEARCH_API_KEY env var
@@ -23,9 +23,8 @@ var client = new BraveSearchClient(apiKey); // BRAVESEARCH_API_KEY env var
 ## Key Files
 
 - `src/libs/BraveSearch/openapi.yaml` -- **Manually maintained** OpenAPI spec (no public spec from Brave)
-- `src/libs/BraveSearch/generate.sh` -- Fixes auth scheme in local spec, runs autosdk (no download step)
+- `src/libs/BraveSearch/generate.sh` -- Runs autosdk with `--security-scheme ApiKey:Header:X-Subscription-Token` (no download step)
 - `src/libs/BraveSearch/Generated/` -- **Never edit** -- auto-generated code
-- `src/libs/BraveSearch/Extensions/BraveSearchClient.Auth.cs` -- Converts Bearer to X-Subscription-Token header
 - `src/libs/BraveSearch/Extensions/BraveSearchClient.AsTool.cs` -- MEAI AIFunction tools (AsSearchTool, AsNewsTool)
 - `src/tests/IntegrationTests/Tests.cs` -- Test helper with bearer auth
 - `src/tests/IntegrationTests/Examples/` -- Example tests (also generate docs)
@@ -34,24 +33,7 @@ var client = new BraveSearchClient(apiKey); // BRAVESEARCH_API_KEY env var
 
 - **No public OpenAPI spec exists** -- `openapi.yaml` was manually created from Brave Search API docs
 - All 6 endpoints are GET requests to `https://api.search.brave.com/res/v1`
-- Auth uses `X-Subscription-Token` header natively; `generate.sh` converts `apiKey` to `http/bearer`
-
-## Auth Hook
-
-The `PrepareRequest` hook in `Extensions/BraveSearchClient.Auth.cs` converts Bearer to the native header:
-
-```csharp
-partial void PrepareRequest(HttpClient client, HttpRequestMessage request)
-{
-    if (request.Headers.Authorization is { Scheme: "Bearer", Parameter: { } apiKey })
-    {
-        request.Headers.Authorization = null;
-        request.Headers.TryAddWithoutValidation("X-Subscription-Token", apiKey);
-    }
-}
-```
-
-> **Alternative:** Could use `--security-scheme ApiKey:Header:X-Subscription-Token` CLI arg instead of the jq auth conversion + PrepareRequest hook.
+- Auth: `--security-scheme ApiKey:Header:X-Subscription-Token` sends the key directly as the native header (no spec conversion or PrepareRequest hook needed)
 
 ## Endpoints
 

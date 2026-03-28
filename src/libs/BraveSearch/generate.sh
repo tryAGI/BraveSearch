@@ -6,17 +6,12 @@ dotnet tool update --global autosdk.cli --prerelease || dotnet tool install --gl
 rm -rf Generated
 
 # Brave Search has no public OpenAPI spec — openapi.yaml is manually maintained from docs.
-# Convert apiKey auth to http/bearer for AutoSDK compatibility.
-yq -i '
-  del(.components.securitySchemes) |
-  .components.securitySchemes.BearerAuth = {"type": "http", "scheme": "bearer"} |
-  del(.security) |
-  .security = [{"BearerAuth": []}]
-' openapi.yaml
-
+# Auth: --security-scheme sends the API key directly as X-Subscription-Token header
+#       (no jq/yq conversion or PrepareRequest hook needed).
 autosdk generate openapi.yaml \
   --namespace BraveSearch \
   --clientClassName BraveSearchClient \
   --targetFramework net10.0 \
   --output Generated \
-  --exclude-deprecated-operations
+  --exclude-deprecated-operations \
+  --security-scheme ApiKey:Header:X-Subscription-Token

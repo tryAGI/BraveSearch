@@ -6,7 +6,7 @@ namespace BraveSearch
     public sealed partial class BraveSearchClient
     {
         /// <inheritdoc/>
-        public void AuthorizeUsingBearer(
+        public void AuthorizeUsingApiKeyInHeader(
             string apiKey)
         {
             apiKey = apiKey ?? throw new global::System.ArgumentNullException(nameof(apiKey));
@@ -14,9 +14,9 @@ namespace BraveSearch
             Authorizations.Clear();
             Authorizations.Add(new global::BraveSearch.EndPointAuthorization
             {
-                Type = "Http",
+                Type = "ApiKey",
                 Location = "Header",
-                Name = "Bearer",
+                Name = "X-Subscription-Token",
                 Value = apiKey,
             });
         }

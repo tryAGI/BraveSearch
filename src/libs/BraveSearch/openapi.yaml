@@ -991,10 +991,6 @@ components:
         detail:
           type: string
           description: Detailed error message.
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
 paths:
   /web/search:
     get:
@@ -1510,5 +1506,3 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-security:
-  - BearerAuth: []
