@@ -34,8 +34,24 @@ var client = new BraveSearchClient(apiKey); // BRAVESEARCH_API_KEY env var
 
 - **No public OpenAPI spec exists** -- `openapi.yaml` was manually created from Brave Search API docs
 - All 6 endpoints are GET requests to `https://api.search.brave.com/res/v1`
-- Auth uses `X-Subscription-Token` header natively, but SDK uses Bearer auth pattern
-- The PrepareRequest hook in Auth.cs converts Bearer back to X-Subscription-Token
+- Auth uses `X-Subscription-Token` header natively; `generate.sh` converts `apiKey` to `http/bearer`
+
+## Auth Hook
+
+The `PrepareRequest` hook in `Extensions/BraveSearchClient.Auth.cs` converts Bearer to the native header:
+
+```csharp
+partial void PrepareRequest(HttpClient client, HttpRequestMessage request)
+{
+    if (request.Headers.Authorization is { Scheme: "Bearer", Parameter: { } apiKey })
+    {
+        request.Headers.Authorization = null;
+        request.Headers.TryAddWithoutValidation("X-Subscription-Token", apiKey);
+    }
+}
+```
+
+> **Alternative:** Could use `--security-scheme ApiKey:Header:X-Subscription-Token` CLI arg instead of the jq auth conversion + PrepareRequest hook.
 
 ## Endpoints
 
