@@ -5,6 +5,25 @@ namespace BraveSearch
 {
     public partial class BraveSearchClient
     {
+
+
+        private static readonly global::BraveSearch.EndPointSecurityRequirement s_SummarizeSecurityRequirement0 =
+            new global::BraveSearch.EndPointSecurityRequirement
+            {
+                Authorizations = new global::BraveSearch.EndPointAuthorizationRequirement[]
+                {                    new global::BraveSearch.EndPointAuthorizationRequirement
+                    {
+                        Type = "ApiKey",
+                        Location = "Header",
+                        Name = "X-Subscription-Token",
+                        FriendlyName = "ApiKeyInHeader",
+                    },
+                },
+            };
+        private static readonly global::BraveSearch.EndPointSecurityRequirement[] s_SummarizeSecurityRequirements =
+            new global::BraveSearch.EndPointSecurityRequirement[]
+            {                s_SummarizeSecurityRequirement0,
+            };
         partial void PrepareSummarizeArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string key,
@@ -48,13 +67,19 @@ namespace BraveSearch
                 key: ref key,
                 entityInfo: ref entityInfo);
 
+
+            var __authorizations = global::BraveSearch.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_SummarizeSecurityRequirements,
+                operationName: "SummarizeAsync");
+
             var __pathBuilder = new global::BraveSearch.PathBuilder(
                 path: "/summarizer/search",
                 baseUri: HttpClient.BaseAddress); 
             __pathBuilder
                 .AddRequiredParameter("key", key)
                 .AddOptionalParameter("entity_info", entityInfo?.ToString().ToLowerInvariant()) 
-                ; 
+                ;
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -64,7 +89,7 @@ namespace BraveSearch
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")
