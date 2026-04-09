@@ -5,6 +5,25 @@ namespace BraveSearch
 {
     public partial class BraveSearchClient
     {
+
+
+        private static readonly global::BraveSearch.EndPointSecurityRequirement s_NewsSearchSecurityRequirement0 =
+            new global::BraveSearch.EndPointSecurityRequirement
+            {
+                Authorizations = new global::BraveSearch.EndPointAuthorizationRequirement[]
+                {                    new global::BraveSearch.EndPointAuthorizationRequirement
+                    {
+                        Type = "ApiKey",
+                        Location = "Header",
+                        Name = "X-Subscription-Token",
+                        FriendlyName = "ApiKeyInHeader",
+                    },
+                },
+            };
+        private static readonly global::BraveSearch.EndPointSecurityRequirement[] s_NewsSearchSecurityRequirements =
+            new global::BraveSearch.EndPointSecurityRequirement[]
+            {                s_NewsSearchSecurityRequirement0,
+            };
         partial void PrepareNewsSearchArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string q,
@@ -92,6 +111,12 @@ namespace BraveSearch
                 spellcheck: ref spellcheck,
                 extraSnippets: ref extraSnippets);
 
+
+            var __authorizations = global::BraveSearch.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_NewsSearchSecurityRequirements,
+                operationName: "NewsSearchAsync");
+
             var __pathBuilder = new global::BraveSearch.PathBuilder(
                 path: "/news/search",
                 baseUri: HttpClient.BaseAddress); 
@@ -105,7 +130,7 @@ namespace BraveSearch
                 .AddOptionalParameter("freshness", freshness)
                 .AddOptionalParameter("spellcheck", spellcheck?.ToString().ToLowerInvariant())
                 .AddOptionalParameter("extra_snippets", extraSnippets?.ToString().ToLowerInvariant()) 
-                ; 
+                ;
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -115,7 +140,7 @@ namespace BraveSearch
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

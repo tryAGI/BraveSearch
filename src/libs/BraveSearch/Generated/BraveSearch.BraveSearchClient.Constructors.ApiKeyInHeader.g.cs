@@ -6,6 +6,7 @@ namespace BraveSearch
     public sealed partial class BraveSearchClient
     {
         /// <inheritdoc cref="BraveSearchClient(global::System.Net.Http.HttpClient?, global::System.Uri?, global::System.Collections.Generic.List{global::BraveSearch.EndPointAuthorization}?, bool)"/>
+
         public BraveSearchClient(
             string apiKey,
             global::System.Net.Http.HttpClient? httpClient = null,
