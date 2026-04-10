@@ -26,6 +26,7 @@ namespace BraveSearch
             Authorizations.Add(new global::BraveSearch.EndPointAuthorization
             {
                 Type = "ApiKey",
+                SchemeId = "ApikeyXSubscriptionToken",
                 Location = "Header",
                 Name = "X-Subscription-Token",
                 Value = apiKey,
