@@ -139,7 +139,7 @@ namespace BraveSearch
                 PrepareSummarizeRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    key: key,
+                    key: key!,
                     entityInfo: entityInfo);
 
                 return __httpRequest;

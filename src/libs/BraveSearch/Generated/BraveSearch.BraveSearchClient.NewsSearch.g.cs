@@ -190,7 +190,7 @@ namespace BraveSearch
                 PrepareNewsSearchRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    q: q,
+                    q: q!,
                     country: country,
                     searchLang: searchLang,
                     count: count,

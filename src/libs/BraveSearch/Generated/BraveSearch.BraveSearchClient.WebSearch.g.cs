@@ -233,7 +233,7 @@ namespace BraveSearch
                 PrepareWebSearchRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    q: q,
+                    q: q!,
                     country: country,
                     searchLang: searchLang,
                     uiLang: uiLang,
