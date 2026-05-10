@@ -305,5 +305,6 @@ namespace BraveSearch
         public Query()
         {
         }
+
     }
 }

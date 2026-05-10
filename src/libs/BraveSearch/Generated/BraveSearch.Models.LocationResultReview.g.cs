@@ -83,5 +83,6 @@ namespace BraveSearch
         public LocationResultReview()
         {
         }
+
     }
 }

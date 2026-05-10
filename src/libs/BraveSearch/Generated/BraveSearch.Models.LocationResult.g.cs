@@ -228,5 +228,6 @@ namespace BraveSearch
         public LocationResult()
         {
         }
+
     }
 }

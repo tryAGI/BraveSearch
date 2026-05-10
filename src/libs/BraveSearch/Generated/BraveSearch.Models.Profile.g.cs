@@ -74,5 +74,6 @@ namespace BraveSearch
         public Profile()
         {
         }
+
     }
 }
