@@ -151,5 +151,6 @@ namespace BraveSearch
         public NewsResult()
         {
         }
+
     }
 }
