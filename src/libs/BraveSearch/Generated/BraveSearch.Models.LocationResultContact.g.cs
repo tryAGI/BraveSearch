@@ -52,5 +52,6 @@ namespace BraveSearch
         public LocationResultContact()
         {
         }
+
     }
 }

@@ -85,5 +85,6 @@ namespace BraveSearch
         public SuggestResult()
         {
         }
+
     }
 }

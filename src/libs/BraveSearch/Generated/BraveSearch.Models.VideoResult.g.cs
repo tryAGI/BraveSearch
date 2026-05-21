@@ -129,5 +129,6 @@ namespace BraveSearch
         public VideoResult()
         {
         }
+
     }
 }

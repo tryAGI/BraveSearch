@@ -41,5 +41,6 @@ namespace BraveSearch
         public SummarizerSearchResultEnrichments()
         {
         }
+
     }
 }

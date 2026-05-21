@@ -140,5 +140,6 @@ namespace BraveSearch
         public WebSearchResponse()
         {
         }
+
     }
 }

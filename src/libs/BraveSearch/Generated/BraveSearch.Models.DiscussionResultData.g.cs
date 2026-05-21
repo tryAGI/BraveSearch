@@ -162,5 +162,6 @@ namespace BraveSearch
         public DiscussionResultData()
         {
         }
+
     }
 }

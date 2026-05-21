@@ -63,6 +63,35 @@ namespace BraveSearch
             global::BraveSearch.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
+            var __response = await SummarizeAsResponseAsync(
+                key: key,
+                entityInfo: entityInfo,
+                requestOptions: requestOptions,
+                cancellationToken: cancellationToken
+            ).ConfigureAwait(false);
+
+            return __response.Body;
+        }
+        /// <summary>
+        /// Summarizer<br/>
+        /// Get an AI-generated summary for a search query.<br/>
+        /// Requires a summarizer key obtained from the web search endpoint<br/>
+        /// (pass summary=true to web search first). The key is found in the<br/>
+        /// web search response under the summarizer field.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="entityInfo">
+        /// Default Value: false
+        /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::BraveSearch.ApiException"></exception>
+        public async global::System.Threading.Tasks.Task<global::BraveSearch.AutoSDKHttpResponse<global::BraveSearch.SummarizerSearchResult>> SummarizeAsResponseAsync(
+            string key,
+            bool? entityInfo = default,
+            global::BraveSearch.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default)
+        {
             PrepareArguments(
                 client: HttpClient);
             PrepareSummarizeArguments(
@@ -92,12 +121,13 @@ namespace BraveSearch
 
             global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
             {
+
                             var __pathBuilder = new global::BraveSearch.PathBuilder(
                                 path: "/summarizer/search",
-                                baseUri: HttpClient.BaseAddress); 
+                                baseUri: HttpClient.BaseAddress);
                             __pathBuilder
                                 .AddRequiredParameter("key", key)
-                                .AddOptionalParameter("entity_info", entityInfo?.ToString().ToLowerInvariant()) 
+                                .AddOptionalParameter("entity_info", entityInfo?.ToString().ToLowerInvariant())
                                 ;
                             var __path = __pathBuilder.ToString();
                 __path = global::BraveSearch.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -170,6 +200,8 @@ namespace BraveSearch
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                     try
                     {
@@ -180,6 +212,11 @@ namespace BraveSearch
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
                     {
+                        var __retryDelay = global::BraveSearch.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: null,
+                            attempt: __attempt);
                         var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
                         await global::BraveSearch.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
@@ -197,6 +234,8 @@ namespace BraveSearch
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: __willRetry,
+                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
+                                retryReason: "exception",
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         if (!__willRetry)
                         {
@@ -206,8 +245,7 @@ namespace BraveSearch
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::BraveSearch.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -216,6 +254,11 @@ namespace BraveSearch
                         __attempt < __maxAttempts &&
                         global::BraveSearch.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
                     {
+                        var __retryDelay = global::BraveSearch.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: __response,
+                            attempt: __attempt);
                         await global::BraveSearch.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::BraveSearch.AutoSDKRequestOptionsSupport.CreateHookContext(
@@ -232,14 +275,15 @@ namespace BraveSearch
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: true,
+                                retryDelay: __retryDelay,
+                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         __response.Dispose();
                         __response = null;
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::BraveSearch.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -279,6 +323,8 @@ namespace BraveSearch
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                 else
@@ -299,6 +345,8 @@ namespace BraveSearch
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // Unauthorized.
@@ -437,9 +485,13 @@ namespace BraveSearch
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    return
-                                        global::BraveSearch.SummarizerSearchResult.FromJson(__content, JsonSerializerContext) ??
+                                    var __value = global::BraveSearch.SummarizerSearchResult.FromJson(__content, JsonSerializerContext) ??
                                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
+                                    return new global::BraveSearch.AutoSDKHttpResponse<global::BraveSearch.SummarizerSearchResult>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::BraveSearch.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
@@ -467,9 +519,13 @@ namespace BraveSearch
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    return
-                                        await global::BraveSearch.SummarizerSearchResult.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                                    var __value = await global::BraveSearch.SummarizerSearchResult.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
                                         throw new global::System.InvalidOperationException("Response deserialization failed.");
+                                    return new global::BraveSearch.AutoSDKHttpResponse<global::BraveSearch.SummarizerSearchResult>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::BraveSearch.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {

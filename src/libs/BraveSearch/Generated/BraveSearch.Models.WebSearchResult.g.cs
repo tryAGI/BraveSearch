@@ -207,5 +207,6 @@ namespace BraveSearch
         public WebSearchResult()
         {
         }
+
     }
 }

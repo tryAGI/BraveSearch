@@ -63,5 +63,6 @@ namespace BraveSearch
         public NewsResults()
         {
         }
+
     }
 }
