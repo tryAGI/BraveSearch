@@ -17,3 +17,20 @@ autosdk generate openapi.yaml \
   --output Generated \
   --exclude-deprecated-operations \
   --security-scheme ApiKey:Header:X-Subscription-Token
+
+rm -rf ../../cli/BraveSearch.CLI
+
+autosdk cli-project openapi.yaml \
+  --output ../../cli/BraveSearch.CLI \
+  --sdk-project ../../libs/BraveSearch/BraveSearch.csproj \
+  --targetFramework net10.0 \
+  --namespace BraveSearch \
+  --clientClassName BraveSearchClient \
+  --package-id BraveSearch.CLI \
+  --tool-command-name tryagi-brave-search \
+  --user-secrets-id BraveSearch.CLI \
+  --api-key-env-var BRAVESEARCH_API_KEY \
+  --base-url-env-var BRAVESEARCH_BASE_URL \
+  --cli-credential-file \
+  --exclude-deprecated-operations \
+  --security-scheme ApiKey:Header:X-Subscription-Token
