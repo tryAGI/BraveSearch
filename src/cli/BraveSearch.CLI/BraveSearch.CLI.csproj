@@ -7,7 +7,7 @@
     <LangVersion>preview</LangVersion>
     <PackAsTool>true</PackAsTool>
     <PackageId>BraveSearch.CLI</PackageId>
-    <ToolCommandName>tryagi-brave-search</ToolCommandName>
+    <ToolCommandName>brave-search</ToolCommandName>
     <UserSecretsId>BraveSearch.CLI</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>

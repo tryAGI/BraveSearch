@@ -27,7 +27,7 @@ autosdk cli-project openapi.yaml \
   --namespace BraveSearch \
   --clientClassName BraveSearchClient \
   --package-id BraveSearch.CLI \
-  --tool-command-name tryagi-brave-search \
+  --tool-command-name brave-search \
   --user-secrets-id BraveSearch.CLI \
   --api-key-env-var BRAVESEARCH_API_KEY \
   --base-url-env-var BRAVESEARCH_BASE_URL \
