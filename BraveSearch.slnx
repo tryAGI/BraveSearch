@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/cli/">
+    <Project Path="src/cli/BraveSearch.CLI/BraveSearch.CLI.csproj" />
+  </Folder>
   <Folder Name="/libs/">
     <File Path="src/libs/Directory.Build.props" />
     <Project Path="src/libs/BraveSearch/BraveSearch.csproj" />
