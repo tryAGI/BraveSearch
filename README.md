@@ -19,6 +19,13 @@ using BraveSearch;
 using var client = new BraveSearchClient(apiKey);
 ```
 
+### CLI
+
+```bash
+dotnet tool install --global BraveSearch.CLI --prerelease
+brave-search api --help
+```
+
 <!-- EXAMPLES:START -->
 <!-- EXAMPLES:END -->
 
