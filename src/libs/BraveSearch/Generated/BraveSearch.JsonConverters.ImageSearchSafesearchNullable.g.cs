@@ -20,7 +20,7 @@ namespace BraveSearch.JsonConverters
                     {
                         return global::BraveSearch.ImageSearchSafesearchExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

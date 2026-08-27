@@ -4,7 +4,7 @@
 namespace BraveSearch
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class LocationResultReviewRating
     {

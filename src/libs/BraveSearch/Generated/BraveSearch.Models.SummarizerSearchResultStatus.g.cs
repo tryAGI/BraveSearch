@@ -9,15 +9,15 @@ namespace BraveSearch
     public enum SummarizerSearchResultStatus
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Complete,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Failed,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Partial,
     }

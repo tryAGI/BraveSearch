@@ -9,7 +9,7 @@ namespace BraveSearch
     public enum WebSearchResultType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SearchResult,
     }
