@@ -4,16 +4,16 @@
 namespace BraveSearch
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum WebSearchUnits
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Imperial,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Metric,
     }

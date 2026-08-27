@@ -4,7 +4,7 @@
 namespace BraveSearch
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class LocationResultReview
     {
@@ -33,7 +33,7 @@ namespace BraveSearch
         public string? Description { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("rating")]
         public global::BraveSearch.LocationResultReviewRating? Rating { get; set; }

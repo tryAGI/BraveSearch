@@ -202,7 +202,7 @@ namespace BraveSearch
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                 global::BraveSearch.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,

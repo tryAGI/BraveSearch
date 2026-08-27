@@ -9,15 +9,15 @@ namespace BraveSearch
     public enum NewsSearchSafesearch
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Moderate,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Off,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Strict,
     }
