@@ -56,6 +56,8 @@ internal static partial class SuggestCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"suggest", @"Suggest (Autocomplete)
@@ -102,6 +104,7 @@ Get autocomplete suggestions for a partial search query.");
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
