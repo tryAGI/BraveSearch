@@ -62,6 +62,8 @@ internal static partial class ImageSearchCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"image-search", @"Image Search
@@ -111,6 +113,7 @@ Search for images using Brave Search.");
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
