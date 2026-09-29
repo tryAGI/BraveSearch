@@ -80,9 +80,9 @@ internal static partial class NewsSearchCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"news-search", @"News Search
+        var command = new Command(commandName ?? @"news-search", @"News Search
 Search for news articles using Brave Search.");
                         command.Options.Add(Q);
                         command.Options.Add(Country);

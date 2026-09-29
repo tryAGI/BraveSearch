@@ -42,9 +42,9 @@ Get this by passing summary=true to the web search endpoint.
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"summarize", @"Summarizer
+        var command = new Command(commandName ?? @"summarize", @"Summarizer
 Get an AI-generated summary for a search query.
 Requires a summarizer key obtained from the web search endpoint
 (pass summary=true to web search first). The key is found in the

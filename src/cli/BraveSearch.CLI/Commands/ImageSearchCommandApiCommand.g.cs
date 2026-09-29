@@ -64,9 +64,9 @@ internal static partial class ImageSearchCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"image-search", @"Image Search
+        var command = new Command(commandName ?? @"image-search", @"Image Search
 Search for images using Brave Search.");
                         command.Options.Add(Q);
                         command.Options.Add(Country);

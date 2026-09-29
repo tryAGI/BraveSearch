@@ -126,9 +126,9 @@ Requires subscription with summarizer access.
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"web-search", @"Web Search
+        var command = new Command(commandName ?? @"web-search", @"Web Search
 Search the web using Brave Search. Returns web results, videos, news,
 locations, infoboxes, discussions, FAQs, and related content.
 ");
