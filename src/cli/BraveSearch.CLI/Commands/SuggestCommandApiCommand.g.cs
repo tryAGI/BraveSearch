@@ -58,9 +58,9 @@ internal static partial class SuggestCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"suggest", @"Suggest (Autocomplete)
+        var command = new Command(commandName ?? @"suggest", @"Suggest (Autocomplete)
 Get autocomplete suggestions for a partial search query.");
                         command.Options.Add(Q);
                         command.Options.Add(Country);
