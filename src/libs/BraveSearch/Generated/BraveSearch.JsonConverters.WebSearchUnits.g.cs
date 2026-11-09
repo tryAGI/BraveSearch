@@ -18,7 +18,7 @@ namespace BraveSearch.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::BraveSearch.WebSearchUnitsExtensions.ToEnum(stringValue) ?? default;
+                        return global::BraveSearch.WebSearchUnitsExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::BraveSearch.WebSearchUnits.");
                     }
 
                     break;
